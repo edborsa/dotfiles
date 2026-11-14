@@ -1,0 +1,5 @@
+font-family = "FiraCode Nerd Font"
+font-size = 12
+macos-option-as-alt = true
+mouse-scroll-multiplier = 3
+shell-integration-features = ssh-terminfo

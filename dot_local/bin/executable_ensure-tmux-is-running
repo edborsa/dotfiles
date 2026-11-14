@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ -n "${FLOATING_TMUX_SESSION:-}" ]]; then
+  tmux attach-session -t "$FLOATING_TMUX_SESSION" || tmux new -s "$FLOATING_TMUX_SESSION"
+elif [[ -z "${TMUX:-}" && -z "${SSH_CLIENT:-}" && -z "${NO_TMUX:-}" ]]; then
+  "$HOME/.local/bin/tat"
+fi

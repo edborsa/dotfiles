@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+base="${1:-develop}"
+current="$(git branch --show-current)"
+
+if [[ -z "$current" ]]; then
+  echo "Could not determine current branch" >&2
+  exit 1
+fi
+
+git diff --name-only "$base..$current"

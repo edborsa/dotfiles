@@ -1,0 +1,37 @@
+#!/bin/zsh
+# Report-only: lists files that break the folder layout. Never moves anything.
+# Run by hand for details; the launchd agent runs it weekly and sends a notification.
+setopt null_glob
+
+allowed=(Applications Desktop Documents Downloads Library Movies Music Pictures Public
+         projects Notes nix-darwin osx_dotfiles)
+problems=()
+
+for entry in "$HOME"/*; do
+  name=${entry:t}
+  if [[ -d $entry && ! -L $entry ]]; then
+    (( ${allowed[(Ie)$name]} )) || problems+=("unknown folder in ~: $name")
+  else
+    problems+=("loose file in ~: $name")
+  fi
+done
+
+for entry in "$HOME"/Documents/*(.N) "$HOME"/Documents/*(@N); do
+  problems+=("loose file in ~/Documents: ${entry:t}")
+done
+
+for dir in Downloads Desktop; do
+  for entry in "$HOME/$dir"/*(Nm+14); do
+    problems+=("older than 14 days in ~/$dir: ${entry:t}")
+  done
+done
+
+if (( ${#problems} == 0 )); then
+  [[ -t 1 ]] && echo "tidy-check: all tidy"
+  exit 0
+fi
+
+printf '%s\n' "${problems[@]}"
+if [[ ! -t 1 ]]; then
+  osascript -e "display notification \"${#problems} item(s) out of place. Run tidy-check for details.\" with title \"tidy-check\""
+fi

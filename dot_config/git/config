@@ -1,0 +1,53 @@
+[alias]
+	asm = "!f() { git add --all && git commit -s -m \"$*\"; }; f"
+	br = "branch"
+	ci = "commit"
+	co = "checkout"
+	st = "status --short --branch"
+
+[branch]
+	sort = "-committerdate"
+
+[column]
+	ui = "auto"
+
+[core]
+	editor = "vim"
+
+[delta]
+	line-numbers = true
+	side-by-side = true
+
+[diff]
+	algorithm = "histogram"
+
+[fetch]
+	prune = true
+
+[init]
+	defaultBranch = "main"
+
+[interactive]
+	diffFilter = "delta --color-only"
+
+[merge]
+	conflictStyle = "zdiff3"
+
+[pager]
+	blame = "delta"
+	diff = "delta"
+	log = "delta"
+	show = "delta"
+
+[pull]
+	ff = "only"
+
+[rerere]
+	enabled = true
+
+[tag]
+	sort = "version:refname"
+
+[user]
+	email = "borsa.dado@gmail.com"
+	name = "Eduardo Borsa"

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+histfile="${HISTFILE:-$HOME/.zsh_history}"
+
+if [[ ! -f "$histfile" ]]; then
+  echo "History file not found: $histfile" >&2
+  exit 1
+fi
+
+command="$(
+  sed -E 's/^: [0-9]+:[0-9]+;//' "$histfile" \
+    | awk '!seen[$0]++' \
+    | fzf --tac
+)"
+
+if [[ -z "$command" ]]; then
+  exit 0
+fi
+
+printf 'Press enter to execute:\n%s\n' "$command"
+IFS= read -r key
+
+if [[ -z "$key" ]]; then
+  eval "$command"
+fi

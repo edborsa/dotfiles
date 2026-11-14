@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+histfile="${HISTFILE:-$HOME/.zsh_history}"
+
+if [[ ! -f "$histfile" ]]; then
+  echo "History file not found: $histfile" >&2
+  exit 1
+fi
+
+backup="$histfile.$(date +%Y%m%d_%H%M%S).bak"
+tmpfile="$(mktemp)"
+
+cp -- "$histfile" "$backup"
+
+awk '
+  {
+    line = $0
+    cmd = line
+    sub(/^: [0-9]+:[0-9]+;/, "", cmd)
+    if (!seen[cmd]++) {
+      lines[++count] = line
+    }
+  }
+  END {
+    for (i = 1; i <= count; i++) {
+      print lines[i]
+    }
+  }
+' "$histfile" > "$tmpfile"
+
+mv -- "$tmpfile" "$histfile"
+chmod 600 "$histfile"
+
+echo "Cleaned zsh history. Backup: $backup"

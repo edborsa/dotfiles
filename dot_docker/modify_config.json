@@ -1,0 +1,5 @@
+#!/bin/sh
+# Keep ~/.docker/config.json as is, but make Docker find Homebrew's CLI plugins (compose, buildx).
+input=$(cat)
+[ -n "$input" ] || input='{}'
+printf '%s' "$input" | jq '.cliPluginsExtraDirs = ["/opt/homebrew/lib/docker/cli-plugins"]'

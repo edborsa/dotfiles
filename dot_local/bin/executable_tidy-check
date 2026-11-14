@@ -3,8 +3,7 @@
 # Run by hand for details; the launchd agent runs it weekly and sends a notification.
 setopt null_glob
 
-allowed=(Applications Desktop Documents Downloads Library Movies Music Pictures Public
-         projects Notes)
+allowed=(Applications Desktop Documents Downloads Library Movies Music Pictures Public Notes)
 problems=()
 
 for entry in "$HOME"/*; do
@@ -16,8 +15,14 @@ for entry in "$HOME"/*; do
   fi
 done
 
-for entry in "$HOME"/Documents/*(.N) "$HOME"/Documents/*(@N); do
-  problems+=("loose file in ~/Documents: ${entry:t}")
+# ~/Documents holds only Johnny.Decimal areas: NN-NN_Name folders.
+for entry in "$HOME"/Documents/*(N); do
+  name=${entry:t}
+  if [[ ! -d $entry || -L $entry ]]; then
+    problems+=("loose file in ~/Documents: $name")
+  elif [[ ! $name =~ '^[0-9]{2}-[0-9]{2}_' ]]; then
+    problems+=("not a Johnny.Decimal area in ~/Documents: $name")
+  fi
 done
 
 for dir in Downloads Desktop; do

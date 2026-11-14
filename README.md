@@ -61,28 +61,48 @@ chezmoi edit ~/.zshrc # edit a managed file's source
 | `dot_config/mise/config.toml` | `~/.config/mise/config.toml` | global runtimes; projects pin their own in `.tool-versions` |
 | `dot_config/cspell/cspell.json` | `~/.config/cspell/cspell.json` | |
 | `dot_config/symlink_nvim.tmpl` | `~/.config/nvim` → `nvim/` | |
-| `dot_config/opencode/skills/symlink_elixir.tmpl` | link to `~/projects/companies/minnasoft/agents/skills/elixir` | |
+| `dot_config/opencode/skills/symlink_elixir.tmpl` | link to the Minnasoft agents repo's Elixir skill | |
 | `dot_docker/modify_config.json` | `~/.docker/config.json` | adds Homebrew's CLI plugin folder (compose, buildx) and keeps everything else |
 | `dot_local/bin/` | `~/.local/bin/` | `tat`, `tmux-sessionizer`, `ensure-tmux-is-running`, `tidy-check`, … |
 | `Library/LaunchAgents/` | `~/Library/LaunchAgents/` | the `tidy-check` schedule |
-| `Documents/…`, `Pictures/Screenshots`, `projects/scratch` | empty folders | the folder layout below |
+| `Documents/…`, `Pictures/Screenshots` | empty folders | the Johnny.Decimal skeleton below |
 | `run_*` | — | the setup scripts listed above |
 
 Never managed here: `~/.zshenv.local`, `~/.config/gh`, `~/.config/gcloud`, `~/.config/github-copilot`, opencode's config, and the notes vault.
 
 ## Folder layout
 
-| What | Where |
-|---|---|
-| Code | `~/projects/<org or language>/<name>` |
-| Throwaway code | `~/projects/scratch/` |
-| Notes (Obsidian vault, synced with Syncthing) | `~/Notes` |
-| Books, manuals, reference material | `~/Documents/Library` |
-| Ongoing responsibilities (admin, invoices, a job) | `~/Documents/Areas/<area>` |
-| Non-code projects with an end | `~/Documents/Projects/<name>` |
-| Finished things | `~/Documents/Archive` |
-| Scripts | `~/.local/bin` (via this repo) |
-| Screenshots | `~/Pictures/Screenshots` |
-| Downloads | an inbox only: empty it weekly |
+Everything I file by hand, code included, lives in a [Johnny.Decimal](https://johnnydecimal.com) system in `~/Documents`. It has up to 10 areas, each with up to 10 categories, and IDs inside those. Names use underscores, never spaces, so code paths stay safe for tools.
 
-`tidy-check` only reports and never moves anything. It runs every Monday at 09:00 and sends a notification if something is out of place: loose files in `~` or `~/Documents`, unknown folders in `~`, or Downloads and Desktop items older than 14 days. Run `tidy-check` by hand to see the details.
+```
+~/Documents/
+├── 00-09_System/
+│   ├── 01_Inbox/        # things to file
+│   ├── 02_Home/         # the home repo: agent instructions, skills, and the index of IDs (jdex.md)
+│   └── 03_Scratch/      # throwaway code
+├── 10-19_Work/
+│   └── 11_<Company>/
+│       ├── 11.01_<Topic>/   # documents get IDs
+│       └── <repo>/          # git repos keep their own name (Docker Compose names volumes after it)
+├── 20-29_Personal/      # 21_Finance, 22_Health, 23_Home, …
+└── 30-39_Learning/      # 31_Books, 32_Courses, 33_Reference, …
+```
+
+Outside the system:
+
+| What | Where | Why |
+|---|---|---|
+| Notes (Obsidian vault, synced with Syncthing) | `~/Notes` | Syncthing and Obsidian rely on this path |
+| Screenshots, photos, recordings | `~/Pictures`, `~/Movies` | macOS apps write there |
+| Scripts | `~/.local/bin` (via this repo) | |
+| This repo | `~/.local/share/chezmoi` | chezmoi's default |
+| Downloads | `~/Downloads` | an inbox only: empty it weekly |
+
+`tidy-check` only reports and never moves anything. It runs every Monday at 09:00 and sends a notification if something is out of place:
+
+- loose files in `~` or `~/Documents`;
+- unknown folders in `~`;
+- anything at the top of `~/Documents` that isn't an `NN-NN_Name` area;
+- Downloads and Desktop items older than 14 days.
+
+Run `tidy-check` by hand to see the details.

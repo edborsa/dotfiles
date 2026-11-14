@@ -55,6 +55,7 @@ alias -- grep=rg
 alias -- la='eza -la'
 alias -- ll='eza -l'
 alias -- ls=eza
+alias -- home='cd ~/Documents/00-09_System/02_Home && claude'
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)

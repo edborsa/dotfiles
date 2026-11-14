@@ -2,6 +2,16 @@ local M = {
   'epwalsh/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
   ft = 'markdown',
+  -- Load on these commands too, so they work outside Markdown buffers.
+  cmd = {
+    'ObsidianToday',
+    'ObsidianYesterday',
+    'ObsidianTomorrow',
+    'ObsidianDailies',
+    'ObsidianNew',
+    'ObsidianQuickSwitch',
+    'ObsidianSearch',
+  },
   cond = function()
     return vim.uv.fs_stat('/Users/eduardoborsa/Notes') ~= nil
   end,

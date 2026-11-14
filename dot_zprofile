@@ -2,7 +2,8 @@
 # which reorders anything set earlier.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-path=("$HOME/.local/bin" /opt/homebrew/opt/libpq/bin $path)
+path=("$HOME/.local/bin" /opt/homebrew/opt/libpq/bin $path /opt/homebrew/share/google-cloud-sdk/bin)
+# gcloud components (gke-gcloud-auth-plugin, used by ~/.kube/config) live in the SDK bin, not /opt/homebrew/bin.
 typeset -U path
 
 # Shims so editors and GUI-launched processes find mise tools.

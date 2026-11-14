@@ -4,7 +4,7 @@
 setopt null_glob
 
 allowed=(Applications Desktop Documents Downloads Library Movies Music Pictures Public
-         projects Notes nix-darwin osx_dotfiles)
+         projects Notes)
 problems=()
 
 for entry in "$HOME"/*; do

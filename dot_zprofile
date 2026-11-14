@@ -7,3 +7,7 @@ typeset -U path
 
 # Shims so editors and GUI-launched processes find mise tools.
 eval "$(mise activate zsh --shims)"
+
+# Defaults nix-darwin used to set; kept for parity.
+export EDITOR=nano
+export PAGER="less -R"

@@ -20,7 +20,7 @@ setopt HIST_FCNTL_LOCK APPEND_HISTORY EXTENDED_HISTORY HIST_IGNORE_ALL_DUPS \
   HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY NO_HIST_EXPIRE_DUPS_FIRST \
   NO_HIST_FIND_NO_DUPS NO_HIST_SAVE_NO_DUPS
 
-export LS_COLORS="$(vivid generate tokyonight-moon)"
+export LS_COLORS="$(vivid generate catppuccin-mocha)"
 
 zmodload zsh/complist
 zstyle ':completion:*' menu no
@@ -38,10 +38,6 @@ bindkey -M menuselect '^I' menu-complete
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 
 setopt AUTO_CD AUTO_MENU COMPLETE_IN_WORD INTERACTIVE_COMMENTS HIST_REDUCE_BLANKS
-
-if [[ -o interactive && -z "${NO_TMUX:-}" && -z "${TMUX:-}" && -z "${SSH_CLIENT:-}" ]]; then
-  ensure-tmux-is-running
-fi
 
 if [[ $TERM != "dumb" ]]; then
   eval "$(starship init zsh)"

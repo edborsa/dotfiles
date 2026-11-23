@@ -4,18 +4,3 @@
 type = "archive"
 url = "https://github.com/Aloxaf/fzf-tab/archive/refs/tags/v1.3.0.tar.gz"
 stripComponents = 1
-
-[".config/tmux/plugins/sensible"]
-type = "archive"
-url = "https://github.com/tmux-plugins/tmux-sensible/archive/25cb91f42d020f675bb0a2ce3fbd3a5d96119efa.tar.gz"
-stripComponents = 1
-
-[".config/tmux/plugins/resurrect"]
-type = "archive"
-url = "https://github.com/tmux-plugins/tmux-resurrect/archive/ca6468e2deef11efadfe3a62832ae67742505432.tar.gz"
-stripComponents = 1
-
-[".config/tmux/plugins/yank"]
-type = "archive"
-url = "https://github.com/tmux-plugins/tmux-yank/archive/acfd36e4fcba99f8310a7dfb432111c242fe7392.tar.gz"
-stripComponents = 1

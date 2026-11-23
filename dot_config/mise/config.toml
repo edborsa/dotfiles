@@ -1,4 +1,10 @@
 [tools]
-node = "22"
-python = "3.13"
+erlang = "29.1.2"
+elixir = "1.20.5-otp-29"
+go = "1.27.4"
+lua = "5.5.1"
+node = "26.13.1"
+python = "3.15.2"
 rebar = "latest"
+ruby = "4.0.10"
+rust = "latest"

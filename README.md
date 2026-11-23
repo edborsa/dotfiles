@@ -12,15 +12,16 @@ This repo is public, so it never contains secrets, not even encrypted ones. Mach
 
 # 2. Install chezmoi and apply this repo
 /opt/homebrew/bin/brew install chezmoi
+/opt/homebrew/bin/brew tap xoshbin/asyar && /opt/homebrew/bin/brew trust --tap xoshbin/asyar   # third-party tap in the Brewfile; Homebrew 6+ requires trusting it
 chezmoi init --apply edborsa/dotfiles
 ```
 
 `chezmoi apply` runs these scripts in order:
 
 1. **`brew bundle`** installs everything in the [Brewfile](Brewfile). It runs before the dotfiles are written.
-2. **`mise install`** installs the global runtimes: Node 22, Python 3.13 and rebar3.
+2. **`mise install`** installs the global runtimes: Erlang 29.1.2, Elixir 1.20.5, Go 1.27.4, Lua 5.5.1, Node 26.13.1, Python 3.15.2, Ruby 4.0.10, Rust (latest) and rebar3.
 3. **macOS defaults**: key repeat, Dock, Finder and the screenshot location. It restarts Dock, Finder and SystemUIServer.
-4. **launchd** loads the weekly `tidy-check` agent.
+4. **launchd** loads every `com.edborsa.*` agent: the weekly `tidy-check`, and login launchers for Rex, Asyar, Vorssaint and Tailscale.
 
 Each script runs again only when its input changes, for example when the Brewfile changes.
 
@@ -47,7 +48,7 @@ chezmoi edit ~/.zshrc # edit a managed file's source
 
 - **Add a package:** add it to the Brewfile, then run `chezmoi apply`. Packages are never removed automatically. To remove one, delete it from the Brewfile, then run `brew bundle cleanup --file=Brewfile` by hand (it only lists what it would remove until you add `--force`).
 - **Neovim:** `~/.config/nvim` is a symlink into `nvim/` in this repo. Config edits and lazy.nvim's lock file updates show up in `git status` here right away, with no `chezmoi apply` needed.
-- **Pinned downloads:** fzf-tab and the tmux plugins are pinned in [`.chezmoiexternal.toml`](.chezmoiexternal.toml). To update one, change its version or commit there.
+- **Pinned downloads:** fzf-tab is pinned in [`.chezmoiexternal.toml`](.chezmoiexternal.toml). To update it, change its version there.
 
 ## What's in here
 
@@ -56,15 +57,14 @@ chezmoi edit ~/.zshrc # edit a managed file's source
 | `Brewfile` | — | read by the brew script; never copied to `~` |
 | `dot_zshenv`, `dot_zprofile`, `dot_zshrc` | `~/.zsh*` | PATH is set in `.zprofile`: mise first, then `~/.local/bin`, libpq, Homebrew, and gcloud components |
 | `dot_config/git/` | `~/.config/git/` | git config with delta, and a global ignore file |
-| `dot_config/tmux/tmux.conf` | `~/.config/tmux/tmux.conf` | prefix `C-s`; plugins load from `~/.config/tmux/plugins` |
-| `dot_config/ghostty/config` | `~/.config/ghostty/config` | |
+| `dot_config/rex/init.lua` | `~/.config/rex/init.lua` | Rex terminal multiplexer (replaces tmux); prefix `ctrl+s` |
 | `dot_config/mise/config.toml` | `~/.config/mise/config.toml` | global runtimes; projects pin their own in `.tool-versions` |
 | `dot_config/cspell/cspell.json` | `~/.config/cspell/cspell.json` | |
 | `dot_config/symlink_nvim.tmpl` | `~/.config/nvim` → `nvim/` | |
 | `dot_config/opencode/skills/symlink_elixir.tmpl` | link to the Minnasoft agents repo's Elixir skill | |
 | `dot_docker/modify_config.json` | `~/.docker/config.json` | adds Homebrew's CLI plugin folder (compose, buildx) and keeps everything else |
-| `dot_local/bin/` | `~/.local/bin/` | `tat`, `tmux-sessionizer`, `ensure-tmux-is-running`, `tidy-check`, … |
-| `Library/LaunchAgents/` | `~/Library/LaunchAgents/` | the `tidy-check` schedule |
+| `dot_local/bin/` | `~/.local/bin/` | `tidy-check`, `clean-zsh-history`, `fzf-history-call`, … |
+| `Library/LaunchAgents/` | `~/Library/LaunchAgents/` | the `tidy-check` schedule; Rex, Asyar, Vorssaint and Tailscale start at login |
 | `Documents/…`, `Pictures/Screenshots` | empty folders | the Johnny.Decimal skeleton below |
 | `run_*` | — | the setup scripts listed above |
 

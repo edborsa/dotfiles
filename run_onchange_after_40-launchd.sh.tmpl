@@ -1,6 +1,12 @@
 #!/bin/sh
-# plist hash: {{ include "Library/LaunchAgents/com.edborsa.tidy-check.plist.tmpl" | sha256sum }}
+# Loads every com.edborsa.* agent in ~/Library/LaunchAgents. Runs again when any of them changes.
+# tidy-check hash: {{ include "Library/LaunchAgents/com.edborsa.tidy-check.plist.tmpl" | sha256sum }}
+# asyar hash:      {{ include "Library/LaunchAgents/com.edborsa.asyar.plist" | sha256sum }}
+# vorssaint hash:  {{ include "Library/LaunchAgents/com.edborsa.vorssaint.plist" | sha256sum }}
+# tailscale hash:  {{ include "Library/LaunchAgents/com.edborsa.tailscale.plist" | sha256sum }}
+# rex hash:        {{ include "Library/LaunchAgents/com.edborsa.rex.plist.tmpl" | sha256sum }}
 set -eu
-plist="$HOME/Library/LaunchAgents/com.edborsa.tidy-check.plist"
-launchctl bootout "gui/$(id -u)" "$plist" 2>/dev/null || true
-launchctl bootstrap "gui/$(id -u)" "$plist"
+for plist in "$HOME"/Library/LaunchAgents/com.edborsa.*.plist; do
+  launchctl bootout "gui/$(id -u)" "$plist" 2>/dev/null || true
+  launchctl bootstrap "gui/$(id -u)" "$plist"
+done

@@ -21,4 +21,10 @@ defaults write com.apple.finder ShowStatusBar -bool true
 mkdir -p "$HOME/Pictures/Screenshots"
 defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots"
 
+# Spotlight: free Cmd+Space for Asyar (hotkey 64 = Show Spotlight search; Cmd+Opt+Space for the Finder search window stays on)
+# XML form so the values get real types; the old-style '{ enabled = 0; }' syntax stores strings, which macOS ignores.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
+  '<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>'
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
 killall Dock Finder SystemUIServer 2>/dev/null || true

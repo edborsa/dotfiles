@@ -35,15 +35,13 @@ rex.bind("resize/shift+k", "pane.resize", { amount = 5, direction = "up" })
 rex.bind("resize/=", "pane.balance")
 rex.bind("resize/enter", "client.mode.exit")
 
--- tmux.conf:67-75  resize panes with shift/ctrl + arrows
-rex.bind("shift+left", "pane.resize", { amount = 2, direction = "left" })
-rex.bind("shift+right", "pane.resize", { amount = 2, direction = "right" })
-rex.bind("shift+down", "pane.resize", { amount = 1, direction = "down" })
-rex.bind("shift+up", "pane.resize", { amount = 1, direction = "up" })
-rex.bind("ctrl+left", "pane.resize", { amount = 10, direction = "left" })
-rex.bind("ctrl+right", "pane.resize", { amount = 10, direction = "right" })
-rex.bind("ctrl+down", "pane.resize", { amount = 5, direction = "down" })
-rex.bind("ctrl+up", "pane.resize", { amount = 5, direction = "up" })
+-- Quick resize: ctrl+s, then shift+h/j/k/l (one step per press; use resize mode above to repeat).
+-- Needs the prefix: bare shift+hjkl would type capitals, and ctrl+hjkl are backspace,
+-- newline, kill-line and clear in the shell and Neovim.
+rex.bind("ctrl+s>shift+h", "pane.resize", { amount = 5, direction = "left" })
+rex.bind("ctrl+s>shift+l", "pane.resize", { amount = 5, direction = "right" })
+rex.bind("ctrl+s>shift+j", "pane.resize", { amount = 3, direction = "down" })
+rex.bind("ctrl+s>shift+k", "pane.resize", { amount = 3, direction = "up" })
 
 -- tmux.conf:77-79  tabs
 rex.bind("ctrl+s>c", "client.tab.new")

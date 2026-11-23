@@ -115,6 +115,14 @@ gaps.outer.right =      0
     if.app-id = 'com.hnc.Discord'
     run = 'move-node-to-workspace 3'
 
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.Outlook'
+    run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.teams2'
+    run = 'move-node-to-workspace 3'
+
 # 4: databases
 [[on-window-detected]]
     if.app-id = 'org.jkiss.dbeaver.core.product'

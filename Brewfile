@@ -90,7 +90,7 @@ cask "tailscale-app"
 cask "thunderbird"
 cask "vorssaint"
 cask "nikitabobko/tap/aerospace"
-# Third-party tap: on a new machine run `brew trust --tap xoshbin/asyar` before `chezmoi apply`.
+# Third-party taps: on a new machine run `brew trust --tap nikitabobko/tap` and `brew trust --tap xoshbin/asyar` before `chezmoi apply`.
 tap "xoshbin/asyar"
 cask "xoshbin/asyar/asyar"
 

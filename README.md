@@ -12,7 +12,8 @@ This repo is public, so it never contains secrets, not even encrypted ones. Mach
 
 # 2. Install chezmoi and apply this repo
 /opt/homebrew/bin/brew install chezmoi
-/opt/homebrew/bin/brew tap xoshbin/asyar && /opt/homebrew/bin/brew trust --tap xoshbin/asyar   # third-party tap in the Brewfile; Homebrew 6+ requires trusting it
+/opt/homebrew/bin/brew tap nikitabobko/tap && /opt/homebrew/bin/brew trust --tap nikitabobko/tap   # third-party taps in the Brewfile;
+/opt/homebrew/bin/brew tap xoshbin/asyar && /opt/homebrew/bin/brew trust --tap xoshbin/asyar         # Homebrew 6+ requires trusting them
 chezmoi init --apply edborsa/dotfiles
 ```
 

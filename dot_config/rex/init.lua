@@ -35,6 +35,16 @@ rex.bind("resize/shift+k", "pane.resize", { amount = 5, direction = "up" })
 rex.bind("resize/=", "pane.balance")
 rex.bind("resize/enter", "client.mode.exit")
 
+-- tmux.conf:67-75  resize panes with shift/ctrl + arrows
+rex.bind("shift+left", "pane.resize", { amount = 2, direction = "left" })
+rex.bind("shift+right", "pane.resize", { amount = 2, direction = "right" })
+rex.bind("shift+down", "pane.resize", { amount = 1, direction = "down" })
+rex.bind("shift+up", "pane.resize", { amount = 1, direction = "up" })
+rex.bind("ctrl+left", "pane.resize", { amount = 10, direction = "left" })
+rex.bind("ctrl+right", "pane.resize", { amount = 10, direction = "right" })
+rex.bind("ctrl+down", "pane.resize", { amount = 5, direction = "down" })
+rex.bind("ctrl+up", "pane.resize", { amount = 5, direction = "up" })
+
 -- tmux.conf:77-79  tabs
 rex.bind("ctrl+s>c", "client.tab.new")
 rex.bind("alt+u", "client.tab.previous")

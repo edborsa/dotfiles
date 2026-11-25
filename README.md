@@ -80,7 +80,8 @@ Everything I file by hand, code included, lives in a [Johnny.Decimal](https://jo
 ├── 00-09_System/
 │   ├── 01_Inbox/        # things to file
 │   ├── 02_Home/         # the home repo: agent instructions, skills, and the index of IDs (jdex.md)
-│   └── 03_Scratch/      # throwaway code
+│   ├── 03_Scratch/      # throwaway code
+│   └── 04_Notes/        # Obsidian vault, synced with Syncthing (its own git repo, edborsa/Notes)
 ├── 10-19_Work/
 │   └── 11_<Company>/
 │       ├── 11.01_<Topic>/   # documents get IDs
@@ -93,7 +94,6 @@ Outside the system:
 
 | What | Where | Why |
 |---|---|---|
-| Notes (Obsidian vault, synced with Syncthing) | `~/Notes` | Syncthing and Obsidian rely on this path |
 | Screenshots, photos, recordings | `~/Pictures`, `~/Movies` | macOS apps write there |
 | Scripts | `~/.local/bin` (via this repo) | |
 | This repo | `~/.local/share/chezmoi` | chezmoi's default |

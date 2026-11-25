@@ -3,7 +3,7 @@
 # Run by hand for details; the launchd agent runs it weekly and sends a notification.
 setopt null_glob
 
-allowed=(Applications Desktop Documents Downloads Library Movies Music Pictures Public Notes)
+allowed=(Applications Desktop Documents Downloads Library Movies Music Pictures Public)
 problems=()
 
 for entry in "$HOME"/*; do

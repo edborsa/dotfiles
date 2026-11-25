@@ -13,7 +13,7 @@ local M = {
     'ObsidianSearch',
   },
   cond = function()
-    return vim.uv.fs_stat('/Users/eduardoborsa/Notes') ~= nil
+    return vim.uv.fs_stat(vim.fn.expand('~/Documents/00-09_System/04_Notes')) ~= nil
   end,
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
   -- event = {
@@ -33,7 +33,7 @@ local M = {
     workspaces = {
       {
         name = 'Notes',
-        path = '/Users/eduardoborsa/Notes',
+        path = vim.fn.expand('~/Documents/00-09_System/04_Notes'),
       },
     },
     completion = {
